@@ -20,6 +20,8 @@
 
   // --- INICIALIZACIÓN ---
   document.addEventListener('DOMContentLoaded', () => {
+    initThemeToggle();
+    initScrollProgressBar();
     loadCartFromStorage();
     initNavigation();
     initHeroSlider();
@@ -32,6 +34,10 @@
     initFloatingButtons();
     initQuickViewModal();
     initWhatsAppNameModal();
+    initFaqAccordion();
+    initCookieBanner();
+    initInlineFormValidation();
+    initScrollReveal();
 
     // Comprobar si hay hash en la URL (ej: #inicio, #catalogo, #carrito, #requisicion, #nosotros)
     handleUrlHash();
@@ -360,16 +366,22 @@
         <!-- Contenido -->
         <div class="p-5 flex-1 flex flex-col justify-between">
           <div>
-            <div class="flex items-center justify-between text-xs text-brand-dark/60 font-medium mb-1">
+            <div class="flex items-center justify-between text-xs text-brand-dark/60 dark:text-white/60 font-medium mb-1">
               <span>${prod.categoryName}</span>
-              <span class="font-mono bg-brand-lightGray/60 px-2 py-0.5 rounded text-[11px] font-bold">${prod.brand}</span>
+              <span class="font-mono bg-brand-lightGray/60 dark:bg-white/10 px-2 py-0.5 rounded text-[11px] font-bold text-brand-dark dark:text-accent-yellow">${prod.brand}</span>
+            </div>
+
+            <!-- Calificación con estrellas -->
+            <div class="flex items-center gap-1.5 text-xs text-amber-500 font-extrabold my-1">
+              <span class="tracking-tight text-accent-yellow">★★★★★</span>
+              <span class="text-[11px] text-brand-dark/60 dark:text-white/60 font-semibold">(5.0 • Garantía OEM)</span>
             </div>
             
-            <h3 class="font-bold text-brand-dark text-base leading-snug line-clamp-2 hover:text-brand-dark/80 cursor-pointer" data-action="quick-view" data-product-id="${prod.id}">
+            <h3 class="font-bold text-brand-dark dark:text-white text-base leading-snug line-clamp-2 hover:text-accent-yellow transition-colors cursor-pointer" data-action="quick-view" data-product-id="${prod.id}">
               ${prod.name}
             </h3>
 
-            <p class="text-xs text-brand-dark/70 font-mono mt-1">Ref / Código: <span class="font-bold text-brand-dark">${prod.code}</span></p>
+            <p class="text-xs text-brand-dark/70 dark:text-white/70 font-mono mt-1">Ref / Código: <span class="font-bold text-brand-dark dark:text-accent-yellow">${prod.code}</span></p>
 
             <p class="text-xs text-brand-dark/60 line-clamp-2 mt-2 leading-relaxed">
               ${prod.shortDesc}
@@ -1010,6 +1022,179 @@
       toast.classList.add('opacity-0', 'translate-y-2');
       setTimeout(() => toast.remove(), 300);
     }, 4000);
+  }
+
+  // --- BARRA DE PROGRESO DE SCROLL ---
+  function initScrollProgressBar() {
+    const bar = document.getElementById('scroll-progress-bar');
+    if (!bar) return;
+
+    window.addEventListener('scroll', () => {
+      const winScroll = document.documentElement.scrollTop || document.body.scrollTop;
+      const height = document.documentElement.scrollHeight - document.documentElement.clientHeight;
+      const scrolled = height > 0 ? (winScroll / height) * 100 : 0;
+      bar.style.width = `${scrolled}%`;
+    }, { passive: true });
+  }
+
+  // --- MODO OSCURO / CLARO CON PERSISTENCIA ---
+  function initThemeToggle() {
+    const desktopBtn = document.getElementById('theme-toggle-btn');
+    const mobileBtn = document.getElementById('theme-toggle-mobile-btn');
+    const sunIcon = document.getElementById('theme-toggle-sun');
+    const moonIcon = document.getElementById('theme-toggle-moon');
+    const mobileLabel = document.getElementById('theme-toggle-mobile-label');
+
+    function applyTheme(isDark) {
+      if (isDark) {
+        document.documentElement.classList.add('dark');
+        if (sunIcon) sunIcon.classList.remove('hidden');
+        if (moonIcon) moonIcon.classList.add('hidden');
+        if (mobileLabel) mobileLabel.textContent = 'Claro ☀️';
+      } else {
+        document.documentElement.classList.remove('dark');
+        if (sunIcon) sunIcon.classList.add('hidden');
+        if (moonIcon) moonIcon.classList.remove('hidden');
+        if (mobileLabel) mobileLabel.textContent = 'Oscuro 🌙';
+      }
+    }
+
+    // Comprobar preferencia guardada o del sistema
+    let savedTheme = null;
+    try {
+      savedTheme = localStorage.getItem('ace_theme');
+    } catch (_) {}
+
+    const prefersDark = window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches;
+    const initialIsDark = savedTheme ? savedTheme === 'dark' : prefersDark;
+    applyTheme(initialIsDark);
+
+    function toggle() {
+      const isCurrentlyDark = document.documentElement.classList.contains('dark');
+      const newDark = !isCurrentlyDark;
+      applyTheme(newDark);
+      try {
+        localStorage.setItem('ace_theme', newDark ? 'dark' : 'light');
+      } catch (_) {}
+    }
+
+    if (desktopBtn) desktopBtn.addEventListener('click', toggle);
+    if (mobileBtn) mobileBtn.addEventListener('click', toggle);
+  }
+
+  // --- PREGUNTAS FRECUENTES (FAQ EN ACORDEÓN) ---
+  function initFaqAccordion() {
+    const triggers = document.querySelectorAll('.faq-trigger');
+    if (!triggers.length) return;
+
+    triggers.forEach(trigger => {
+      trigger.addEventListener('click', () => {
+        const item = trigger.closest('.faq-item');
+        const content = item ? item.querySelector('.faq-content') : null;
+        const icon = trigger.querySelector('.faq-icon');
+        if (!content) return;
+
+        const isCurrentlyOpen = !content.classList.contains('hidden');
+
+        // Cerrar otros acordeones abiertos para mantener orden visual
+        document.querySelectorAll('.faq-item').forEach(other => {
+          const otherContent = other.querySelector('.faq-content');
+          const otherIcon = other.querySelector('.faq-icon');
+          if (otherContent) otherContent.classList.add('hidden');
+          if (otherIcon) otherIcon.classList.remove('rotate-180');
+        });
+
+        // Alternar el actual
+        if (!isCurrentlyOpen) {
+          content.classList.remove('hidden');
+          if (icon) icon.classList.add('rotate-180');
+        }
+      });
+    });
+  }
+
+  // --- BANNER DE CONSENTIMIENTO DE COOKIES ---
+  function initCookieBanner() {
+    const banner = document.getElementById('cookie-consent-banner');
+    const acceptBtn = document.getElementById('cookie-accept-btn');
+    const essentialBtn = document.getElementById('cookie-essential-btn');
+    if (!banner) return;
+
+    let consent = null;
+    try {
+      consent = localStorage.getItem('ace_cookie_consent');
+    } catch (_) {}
+
+    if (!consent) {
+      setTimeout(() => {
+        banner.classList.remove('opacity-0', 'pointer-events-none', 'translate-y-4');
+        banner.classList.add('opacity-100', 'translate-y-0');
+      }, 1500);
+    }
+
+    function closeBanner(type) {
+      try {
+        localStorage.setItem('ace_cookie_consent', type);
+      } catch (_) {}
+      banner.classList.add('opacity-0', 'translate-y-4');
+      setTimeout(() => {
+        banner.classList.add('pointer-events-none');
+      }, 300);
+    }
+
+    if (acceptBtn) acceptBtn.addEventListener('click', () => closeBanner('all'));
+    if (essentialBtn) essentialBtn.addEventListener('click', () => closeBanner('essential'));
+  }
+
+  // --- VALIDACIÓN VISUAL EN TIEMPO REAL ---
+  function initInlineFormValidation() {
+    const inputs = document.querySelectorAll('#quotation-client-form input, #quotation-client-form textarea, #requisicion-direct-form input, #requisicion-direct-form textarea, #whatsapp-client-name');
+    
+    inputs.forEach(input => {
+      if (!input.hasAttribute('required')) return;
+
+      function validate() {
+        const val = input.value.trim();
+        if (val.length >= 2) {
+          input.classList.remove('field-invalid');
+          input.classList.add('field-valid');
+        } else {
+          input.classList.remove('field-valid');
+          if (val.length > 0) {
+            input.classList.add('field-invalid');
+          } else {
+            input.classList.remove('field-invalid');
+          }
+        }
+      }
+
+      input.addEventListener('input', validate);
+      input.addEventListener('blur', validate);
+    });
+  }
+
+  // --- ANIMACIONES DE ENTRADA SUAVES (SCROLL REVEAL) ---
+  function initScrollReveal() {
+    const targets = document.querySelectorAll('.glass-card, .faq-item, .hero-slide, .app-section h2');
+    if (!targets.length || !('IntersectionObserver' in window)) return;
+
+    targets.forEach(el => {
+      el.classList.add('reveal-on-scroll');
+    });
+
+    const observer = new IntersectionObserver((entries, obs) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add('is-revealed');
+          obs.unobserve(entry.target);
+        }
+      });
+    }, {
+      rootMargin: '0px 0px -40px 0px',
+      threshold: 0.08
+    });
+
+    targets.forEach(el => observer.observe(el));
   }
 
   window.showToast = showToast;

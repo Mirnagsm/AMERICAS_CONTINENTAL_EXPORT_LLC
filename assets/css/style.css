@@ -404,3 +404,81 @@ h1, h2, h3, h4, h5, h6 {
     line-height: 1.15 !important;
   }
 }
+
+/* ================= DARK MODE OVERRIDES ================= */
+.dark body {
+  background-color: #121011;
+  color: #E2E5DC;
+}
+
+.dark .glass-header {
+  background: rgba(18, 16, 17, 0.85);
+  border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+}
+
+.dark .glass-card {
+  background: rgba(28, 25, 27, 0.75);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.35);
+  color: #E2E5DC;
+}
+
+.dark .glass-card:hover {
+  border-color: rgba(255, 211, 0, 0.4);
+}
+
+.dark .nav-link {
+  color: #DCDFD6;
+}
+
+.dark .nav-link:hover {
+  color: #FFD300;
+  background: rgba(255, 255, 255, 0.08);
+}
+
+.dark .nav-link-active {
+  background: #FFD300;
+  color: #161415 !important;
+}
+
+.dark .brand-logo-card {
+  background: rgba(28, 25, 27, 0.9);
+  border-color: rgba(255, 255, 255, 0.1);
+}
+
+.dark input, 
+.dark select, 
+.dark textarea {
+  background-color: #1A1718;
+  color: #FFFFFF;
+  border-color: rgba(255, 255, 255, 0.15);
+}
+
+.dark input:focus, 
+.dark select:focus, 
+.dark textarea:focus {
+  border-color: #FFD300;
+  box-shadow: 0 0 0 2px rgba(255, 211, 0, 0.25);
+}
+
+/* ================= SCROLL REVEAL ANIMATIONS ================= */
+.reveal-on-scroll {
+  opacity: 0;
+  transform: translateY(22px);
+  transition: opacity 0.65s cubic-bezier(0.16, 1, 0.3, 1), transform 0.65s cubic-bezier(0.16, 1, 0.3, 1);
+  will-change: opacity, transform;
+}
+
+.reveal-on-scroll.is-revealed {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* ================= INLINE FORM VALIDATION STYLES ================= */
+input.field-valid, textarea.field-valid {
+  border-color: #22C55E !important;
+}
+
+input.field-invalid, textarea.field-invalid {
+  border-color: #EF4444 !important;
+}

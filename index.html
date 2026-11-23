@@ -4,7 +4,51 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Americas Continental Export LLC | Repuestos de Maquinaria Pesada y Herramientas Industriales</title>
-  <meta name="description" content="Exportación y compra especializada para industria petrolera, construcción, minería, mecánica pesada y paisajismo/jardinería. Atención personalizada desde Myrtle Beach, SC hacia toda Latinoamérica.">
+  <meta name="description" content="Exportación y compra especializada para industria petrolera, construcción, minería, mecánica pesada y soldadura. Atención personalizada desde Myrtle Beach, SC hacia toda Latinoamérica.">
+  <link rel="canonical" href="https://americascontinentalexport.com/">
+
+  <!-- Open Graph / WhatsApp -->
+  <meta property="og:type" content="website">
+  <meta property="og:url" content="https://americascontinentalexport.com/">
+  <meta property="og:title" content="Americas Continental Export LLC | Repuestos y Equipos Industriales">
+  <meta property="og:description" content="Suministro directo desde EE. UU. hacia toda Latinoamérica. Repuestos de maquinaria pesada, inyección diésel, herramientas Snap-on/Milwaukee y equipos Miller/Lincoln Electric.">
+  <meta property="og:image" content="https://americascontinentalexport.com/assets/images/logo_header.png">
+  <meta property="og:locale" content="es_LA">
+  <meta property="og:site_name" content="Americas Continental Export LLC">
+
+  <!-- Twitter Cards -->
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:url" content="https://americascontinentalexport.com/">
+  <meta name="twitter:title" content="Americas Continental Export LLC | Repuestos de Maquinaria Pesada">
+  <meta name="twitter:description" content="Compra y exportación directa de repuestos y equipos industriales hacia Latinoamérica con flete incluido a su destino.">
+  <meta name="twitter:image" content="https://americascontinentalexport.com/assets/images/logo_header.png">
+
+  <!-- Schema.org Structured Data (JSON-LD) -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "AutoPartsStore",
+    "name": "Americas Continental Export LLC",
+    "image": "https://americascontinentalexport.com/assets/images/logo_header.png",
+    "description": "Compra y exportación de repuestos para maquinaria pesada, bombas de inyección e hidráulicas, herramientas de precisión y equipos de soldadura.",
+    "url": "https://americascontinentalexport.com",
+    "telephone": "+1-843-446-9786",
+    "address": {
+      "@type": "PostalAddress",
+      "addressLocality": "Myrtle Beach",
+      "addressRegion": "SC",
+      "addressCountry": "US"
+    },
+    "openingHoursSpecification": {
+      "@type": "OpeningHoursSpecification",
+      "dayOfWeek": ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"],
+      "opens": "06:00",
+      "closes": "18:00"
+    },
+    "paymentAccepted": "Bank of America Wire / ACH, SWIFT Internacional, PayPal, Zelle",
+    "currenciesAccepted": "USD"
+  }
+  </script>
   
   <!-- Favicon -->
   <link rel="icon" type="image/png" sizes="192x192" href="assets/images/favicon-192.png">
@@ -15,6 +59,7 @@
   <script src="https://cdn.tailwindcss.com"></script>
   <script>
     tailwind.config = {
+      darkMode: 'class',
       theme: {
         extend: {
           colors: {
@@ -44,7 +89,10 @@
   <!-- Custom Styles (Glassmorphism, Typography & Neon Glows) -->
   <link rel="stylesheet" href="assets/css/style.css">
 </head>
-<body class="bg-brand-lightBg text-brand-dark min-h-screen flex flex-col font-sans selection:bg-brand-yellow selection:text-brand-dark">
+<body class="bg-brand-lightBg dark:bg-brand-darkDeep text-brand-dark dark:text-brand-lightGray min-h-screen flex flex-col font-sans selection:bg-brand-yellow selection:text-brand-dark transition-colors duration-300">
+
+  <!-- ================= SCROLL PROGRESS BAR ================= -->
+  <div id="scroll-progress-bar" class="fixed top-0 left-0 h-1 bg-gradient-to-r from-brand-yellow via-amber-400 to-yellow-300 z-50 transition-all duration-75 w-0" aria-hidden="true"></div>
 
   <!-- ================= FLOATING GLASS HEADER ================= -->
   <header class="glass-header sticky top-0 z-40 transition-all duration-300">
@@ -60,7 +108,7 @@
       </a>
 
       <!-- MAIN NAVIGATION (5 SECCIONES) -->
-      <nav class="hidden md:flex items-center gap-1 bg-white/80 backdrop-blur-md p-1.5 rounded-full border border-brand-lightGray/80 shadow-sm">
+      <nav class="hidden md:flex items-center gap-1 bg-white/80 dark:bg-brand-dark/80 backdrop-blur-md p-1.5 rounded-full border border-brand-lightGray/80 dark:border-white/10 shadow-sm">
         <a href="#inicio" data-nav-target="inicio" class="nav-link nav-link-active">Inicio</a>
         <a href="#catalogo" data-nav-target="catalogo" class="nav-link">Catálogo</a>
         <a href="#carrito" data-nav-target="carrito" class="nav-link flex items-center gap-2">
@@ -80,12 +128,26 @@
       </nav>
 
       <!-- RIGHT ACTIONS -->
-      <div class="flex items-center gap-3">
+      <div class="flex items-center gap-2.5 sm:gap-3">
+        <!-- Dark Mode Toggle Button -->
+        <button 
+          id="theme-toggle-btn"
+          type="button" 
+          class="p-2.5 rounded-full bg-white dark:bg-brand-dark border border-brand-lightGray dark:border-white/20 shadow-sm hover:border-brand-dark dark:hover:border-accent-yellow transition-all text-brand-dark dark:text-accent-yellow flex items-center justify-center group"
+          title="Alternar modo oscuro / claro"
+          aria-label="Alternar modo oscuro o claro"
+        >
+          <!-- Sun Icon (visible in dark mode) -->
+          <svg id="theme-toggle-sun" class="w-5 h-5 hidden" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 3v1m0 16v1m9-9h-1M4 12H3m15.364 6.364l-.707-.707M6.343 6.343l-.707-.707m12.728 0l-.707.707M6.343 17.657l-.707.707M16 12a4 4 0 11-8 0 4 4 0 018 0z"/></svg>
+          <!-- Moon Icon (visible in light mode) -->
+          <svg id="theme-toggle-moon" class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M20.354 15.354A9 9 0 018.646 3.646 9.003 9.003 0 0012 21a9.003 9.003 0 008.354-5.646z"/></svg>
+        </button>
+
         <!-- Direct Cart Button (Icon + Badge) -->
         <a 
           href="#carrito" 
           data-nav-target="carrito" 
-          class="relative p-2.5 rounded-full bg-white border border-brand-lightGray shadow-sm hover:border-brand-dark transition-all text-brand-dark flex items-center justify-center group"
+          class="relative p-2.5 rounded-full bg-white dark:bg-brand-dark border border-brand-lightGray dark:border-white/20 shadow-sm hover:border-brand-dark dark:hover:border-accent-yellow transition-all text-brand-dark dark:text-white flex items-center justify-center group"
           title="Ver Carrito de Cotización"
         >
           <svg class="w-5 h-5 transition-transform group-hover:scale-110" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -100,7 +162,7 @@
         <button 
           id="mobile-menu-btn" 
           type="button" 
-          class="md:hidden p-2 rounded-xl text-brand-dark hover:bg-brand-lightGray/50 transition focus:outline-none"
+          class="md:hidden p-2 rounded-xl text-brand-dark dark:text-white hover:bg-brand-lightGray/50 dark:hover:bg-white/10 transition focus:outline-none"
           aria-label="Abrir menú"
         >
           <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -112,20 +174,42 @@
     </div>
 
     <!-- MOBILE MENU DROPDOWN -->
-    <div id="mobile-menu" class="hidden md:hidden glass-header border-t border-brand-lightGray/60 px-4 py-4 space-y-2">
-      <a href="#inicio" data-nav-target="inicio" class="block px-4 py-2.5 rounded-xl font-bold text-sm text-brand-dark hover:bg-white/80">Inicio</a>
-      <a href="#catalogo" data-nav-target="catalogo" class="block px-4 py-2.5 rounded-xl font-bold text-sm text-brand-dark hover:bg-white/80">Catálogo de Productos</a>
-      <a href="#carrito" data-nav-target="carrito" class="flex items-center justify-between px-4 py-2.5 rounded-xl font-bold text-sm text-brand-dark hover:bg-white/80">
+    <div id="mobile-menu" class="hidden md:hidden glass-header border-t border-brand-lightGray/60 dark:border-white/10 px-4 py-4 space-y-2">
+      <a href="#inicio" data-nav-target="inicio" class="block px-4 py-2.5 rounded-xl font-bold text-sm text-brand-dark dark:text-white hover:bg-white/80 dark:hover:bg-white/10">Inicio</a>
+      <a href="#catalogo" data-nav-target="catalogo" class="block px-4 py-2.5 rounded-xl font-bold text-sm text-brand-dark dark:text-white hover:bg-white/80 dark:hover:bg-white/10">Catálogo de Productos</a>
+      <a href="#carrito" data-nav-target="carrito" class="flex items-center justify-between px-4 py-2.5 rounded-xl font-bold text-sm text-brand-dark dark:text-white hover:bg-white/80 dark:hover:bg-white/10">
         <span>Carrito de Cotización</span>
         <span class="cart-badge-count hidden bg-brand-yellow text-brand-dark text-xs font-black px-2 py-0.5 rounded-full">0</span>
       </a>
-      <a href="#requisicion" data-nav-target="requisicion" class="flex items-center justify-between px-4 py-2.5 rounded-xl font-bold text-sm bg-accent-yellow/20 text-brand-dark">
+      <a href="#requisicion" data-nav-target="requisicion" class="flex items-center justify-between px-4 py-2.5 rounded-xl font-bold text-sm bg-accent-yellow/20 text-brand-dark dark:text-accent-yellow">
         <span>Pedido Personalizado (Piezas fuera de catálogo)</span>
-        <span class="text-xs font-extrabold bg-accent-yellow px-2 py-0.5 rounded">WhatsApp Directo</span>
+        <span class="text-xs font-extrabold bg-accent-yellow text-brand-dark px-2 py-0.5 rounded">WhatsApp Directo</span>
       </a>
-      <a href="#nosotros" data-nav-target="nosotros" class="block px-4 py-2.5 rounded-xl font-bold text-sm text-brand-dark hover:bg-white/80">Nosotros & Empresa</a>
+      <a href="#nosotros" data-nav-target="nosotros" class="block px-4 py-2.5 rounded-xl font-bold text-sm text-brand-dark dark:text-white hover:bg-white/80 dark:hover:bg-white/10">Nosotros & Empresa</a>
       
-      <div class="pt-3 border-t border-brand-lightGray/60 flex flex-col gap-2 text-xs">
+      <!-- Theme toggle in mobile menu -->
+      <div class="pt-2">
+        <button 
+          id="theme-toggle-mobile-btn" 
+          type="button" 
+          class="w-full flex items-center justify-between px-4 py-2.5 rounded-xl font-bold text-sm text-brand-dark dark:text-white bg-brand-lightBg dark:bg-white/5 border border-brand-lightGray dark:border-white/10"
+        >
+          <span>Modo Oscuro / Claro</span>
+          <span id="theme-toggle-mobile-label" class="text-xs font-black text-brand-yellow">Oscuro 🌙</span>
+        </button>
+      </div>
+
+      <div class="pt-3 border-t border-brand-lightGray/60 dark:border-white/10 flex flex-col gap-2 text-xs">
+        <div class="p-2.5 rounded-xl bg-brand-dark text-white text-center font-bold">
+          Ventas al Mayor & Detal • Atención Personalizada
+        </div>
+        <a href="https://wa.me/18434469786" target="_blank" class="flex items-center gap-2 p-2.5 rounded-xl bg-accent-whatsapp text-white font-bold justify-center shadow">
+          <svg class="w-4 h-4 fill-current" viewBox="0 0 24 24"><path d="M.057 24l1.687-6.163c-1.041-1.804-1.588-3.849-1.587-5.946.003-6.556 5.338-11.891 11.893-11.891 3.181.001 6.167 1.24 8.413 3.488 2.245 2.248 3.481 5.236 3.48 8.414-.003 6.557-5.338 11.892-11.893 11.892-1.99-.001-3.951-.5-5.688-1.448l-6.305 1.654zm6.597-3.807c1.676.995 3.276 1.591 5.392 1.592 5.448 0 9.886-4.434 9.889-9.885.002-5.462-4.415-9.89-9.881-9.892-5.452 0-9.887 4.434-9.889 9.884-.001 2.225.651 3.891 1.746 5.634l-.999 3.648 3.742-.981zm11.387-5.464c-.074-.124-.272-.198-.57-.347-.297-.149-1.758-.868-2.031-.967-.272-.099-.47-.149-.669.149-.198.297-.768.967-.941 1.165-.173.198-.347.223-.644.074-.297-.149-1.255-.462-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.297-.347.446-.521.151-.172.2-.296.3-.495.099-.198.05-.372-.025-.521-.075-.148-.669-1.611-.916-2.206-.242-.579-.487-.501-.669-.51l-.57-.01c-.198 0-.52.074-.792.372s-1.04 1.016-1.04 2.479 1.065 2.876 1.213 3.074c.149.198 2.095 3.2 5.076 4.487.709.306 1.263.489 1.694.626.712.226 1.36.194 1.872.118.571-.085 1.758-.719 2.006-1.413.248-.695.248-1.29.173-1.414z"/></svg>
+          WhatsApp: +1 (843) 446-9786
+        </a>
+      </div>
+    </div>
+  </header>
         <div class="p-2.5 rounded-xl bg-brand-dark text-white text-center font-bold">
           Ventas al Mayor & Detal • Atención Personalizada
         </div>
@@ -680,6 +764,190 @@
               <p class="text-sm text-brand-dark/70 mt-2 leading-relaxed">
                 Indícanos qué pieza, modelo o herramienta necesitas. La ubicamos de inmediato en EE. UU. y te enviamos la cotización formal con flete hasta tu país.
               </p>
+            </div>
+          </div>
+
+        </div>
+      </section>
+
+      <!-- ================= PRUEBA SOCIAL / TESTIMONIOS ================= -->
+      <section class="mt-20 pt-16 border-t border-brand-lightGray/80 dark:border-white/10">
+        <div class="text-center max-w-3xl mx-auto mb-12">
+          <span class="text-xs font-black uppercase tracking-widest text-accent-yellow bg-brand-dark px-3.5 py-1 rounded-full shadow-sm">
+            Casos de Éxito & Clientes
+          </span>
+          <h2 class="text-2xl sm:text-3xl font-black text-brand-dark dark:text-white tracking-tight mt-3">
+            Lo que dicen empresas y talleres en Latinoamérica
+          </h2>
+          <p class="text-sm sm:text-base text-brand-dark/70 dark:text-white/70 mt-2">
+            Despachos continuos y seguros desde Myrtle Beach, SC con seguimiento personalizado vía WhatsApp.
+          </p>
+        </div>
+
+        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+          
+          <!-- Testimonio 1 -->
+          <div class="glass-card p-6 flex flex-col justify-between dark:bg-brand-dark/60 border border-brand-lightGray/80 dark:border-white/10">
+            <div>
+              <div class="flex items-center justify-between mb-3">
+                <div class="flex text-amber-500 text-sm">★★★★★</div>
+                <span class="text-[10px] font-black uppercase tracking-wider bg-accent-yellow/20 text-brand-dark dark:text-accent-yellow px-2 py-0.5 rounded">Lima, Perú</span>
+              </div>
+              <p class="text-xs text-brand-dark/80 dark:text-white/80 italic leading-relaxed">
+                "Teníamos una excavadora CAT parada por una bomba hidráulica difícil de hallar en plaza local. Americas Continental la ubicó en EE. UU. y nos llegó por vía aérea en 5 días."
+              </p>
+            </div>
+            <div class="mt-5 pt-4 border-t border-brand-lightGray/60 dark:border-white/10 flex items-center gap-3">
+              <div class="w-9 h-9 rounded-full bg-brand-dark text-accent-yellow font-black text-xs flex items-center justify-center">CM</div>
+              <div>
+                <h4 class="text-xs font-extrabold text-brand-dark dark:text-white">Ing. Carlos Mendoza</h4>
+                <p class="text-[10px] text-brand-dark/60 dark:text-white/60">Constructora & Movimiento de Tierra</p>
+              </div>
+            </div>
+          </div>
+
+          <!-- Testimonio 2 -->
+          <div class="glass-card p-6 flex flex-col justify-between dark:bg-brand-dark/60 border border-brand-lightGray/80 dark:border-white/10">
+            <div>
+              <div class="flex items-center justify-between mb-3">
+                <div class="flex text-amber-500 text-sm">★★★★★</div>
+                <span class="text-[10px] font-black uppercase tracking-wider bg-accent-yellow/20 text-brand-dark dark:text-accent-yellow px-2 py-0.5 rounded">Barranquilla, COL</span>
+              </div>
+              <p class="text-xs text-brand-dark/80 dark:text-white/80 italic leading-relaxed">
+                "Compramos un lote de bombas de inyección Common Rail y módulos ECM flasheados. Llegaron 100% calibrados en banco y con toda la documentación en regla."
+              </p>
+            </div>
+            <div class="mt-5 pt-4 border-t border-brand-lightGray/60 dark:border-white/10 flex items-center gap-3">
+              <div class="w-9 h-9 rounded-full bg-brand-dark text-accent-yellow font-black text-xs flex items-center justify-center">TD</div>
+              <div>
+                <h4 class="text-xs font-extrabold text-brand-dark dark:text-white">Taller Diésel del Norte</h4>
+                <p class="text-[10px] text-brand-dark/60 dark:text-white/60">Laboratorio de Inyección Diésel</p>
+              </div>
+            </div>
+          </div>
+
+          <!-- Testimonio 3 -->
+          <div class="glass-card p-6 flex flex-col justify-between dark:bg-brand-dark/60 border border-brand-lightGray/80 dark:border-white/10">
+            <div>
+              <div class="flex items-center justify-between mb-3">
+                <div class="flex text-amber-500 text-sm">★★★★★</div>
+                <span class="text-[10px] font-black uppercase tracking-wider bg-accent-yellow/20 text-brand-dark dark:text-accent-yellow px-2 py-0.5 rounded">Guayaquil, ECU</span>
+              </div>
+              <p class="text-xs text-brand-dark/80 dark:text-white/80 italic leading-relaxed">
+                "Excelente atención para equipos forestales y de jardinería Stihl y Husqvarna. Pagamos cómodamente vía Bank of America y el flete marítimo consolidado fue muy rentable."
+              </p>
+            </div>
+            <div class="mt-5 pt-4 border-t border-brand-lightGray/60 dark:border-white/10 flex items-center gap-3">
+              <div class="w-9 h-9 rounded-full bg-brand-dark text-accent-yellow font-black text-xs flex items-center justify-center">AG</div>
+              <div>
+                <h4 class="text-xs font-extrabold text-brand-dark dark:text-white">Agroservicios Guayas</h4>
+                <p class="text-[10px] text-brand-dark/60 dark:text-white/60">Distribución de Maquinaria</p>
+              </div>
+            </div>
+          </div>
+
+          <!-- Testimonio 4 -->
+          <div class="glass-card p-6 flex flex-col justify-between dark:bg-brand-dark/60 border border-brand-lightGray/80 dark:border-white/10">
+            <div>
+              <div class="flex items-center justify-between mb-3">
+                <div class="flex text-amber-500 text-sm">★★★★★</div>
+                <span class="text-[10px] font-black uppercase tracking-wider bg-accent-yellow/20 text-brand-dark dark:text-accent-yellow px-2 py-0.5 rounded">Antofagasta, CHL</span>
+              </div>
+              <p class="text-xs text-brand-dark/80 dark:text-white/80 italic leading-relaxed">
+                "El soporte de cotización por WhatsApp es inmejorable: te envían fotos reales de la pieza antes de embalar y el número de tracking aéreo al instante."
+              </p>
+            </div>
+            <div class="mt-5 pt-4 border-t border-brand-lightGray/60 dark:border-white/10 flex items-center gap-3">
+              <div class="w-9 h-9 rounded-full bg-brand-dark text-accent-yellow font-black text-xs flex items-center justify-center">MS</div>
+              <div>
+                <h4 class="text-xs font-extrabold text-brand-dark dark:text-white">Minera San Pedro</h4>
+                <p class="text-[10px] text-brand-dark/60 dark:text-white/60">Mantenimiento de Flota Pesada</p>
+              </div>
+            </div>
+          </div>
+
+        </div>
+      </section>
+
+      <!-- ================= SECCIÓN DE PREGUNTAS FRECUENTES (FAQ EN ACORDEÓN) ================= -->
+      <section class="mt-20 pt-16 border-t border-brand-lightGray/80 dark:border-white/10">
+        <div class="text-center max-w-3xl mx-auto mb-12">
+          <span class="text-xs font-black uppercase tracking-widest text-accent-yellow bg-brand-dark px-3.5 py-1 rounded-full shadow-sm">
+            Preguntas Frecuentes
+          </span>
+          <h2 class="text-2xl sm:text-3xl font-black text-brand-dark dark:text-white tracking-tight mt-3">
+            Todo lo que necesitas saber sobre exportación y compras
+          </h2>
+          <p class="text-sm sm:text-base text-brand-dark/70 dark:text-white/70 mt-2">
+            Respuestas transparentes sobre envíos, pagos, cotizaciones y repuestos multimarca.
+          </p>
+        </div>
+
+        <div class="max-w-3xl mx-auto space-y-3">
+          
+          <!-- FAQ 1 -->
+          <div class="faq-item glass-card overflow-hidden transition-all duration-200 border border-brand-lightGray/80 dark:border-white/10">
+            <button type="button" class="faq-trigger w-full px-6 py-4.5 text-left flex items-center justify-between gap-4 font-extrabold text-sm sm:text-base text-brand-dark dark:text-white focus:outline-none">
+              <span>¿Cómo funciona el proceso de cotización y exportación?</span>
+              <svg class="faq-icon w-5 h-5 text-accent-yellow transform transition-transform duration-300 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"/></svg>
+            </button>
+            <div class="faq-content hidden px-6 pb-5 pt-1 text-xs sm:text-sm text-brand-dark/75 dark:text-white/75 leading-relaxed border-t border-brand-lightGray/40 dark:border-white/5">
+              Armas tu lista de piezas en el catálogo o solicitas una pieza especial. Al hacer clic en <strong>"Cotizar"</strong>, se genera un mensaje formal a nuestro WhatsApp Business con los códigos exactos. Te respondemos de inmediato con el costo de las piezas y el cálculo exacto del flete internacional hasta tu país (aéreo o marítimo).
+            </div>
+          </div>
+
+          <!-- FAQ 2 -->
+          <div class="faq-item glass-card overflow-hidden transition-all duration-200 border border-brand-lightGray/80 dark:border-white/10">
+            <button type="button" class="faq-trigger w-full px-6 py-4.5 text-left flex items-center justify-between gap-4 font-extrabold text-sm sm:text-base text-brand-dark dark:text-white focus:outline-none">
+              <span>¿Qué métodos de pago aceptan para pedidos internacionales?</span>
+              <svg class="faq-icon w-5 h-5 text-accent-yellow transform transition-transform duration-300 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"/></svg>
+            </button>
+            <div class="faq-content hidden px-6 pb-5 pt-1 text-xs sm:text-sm text-brand-dark/75 dark:text-white/75 leading-relaxed border-t border-brand-lightGray/40 dark:border-white/5">
+              Aceptamos transferencias bancarias directas en Estados Unidos vía <strong>Bank of America (Wire y ACH)</strong>, transferencias internacionales en dólares vía <strong>código SWIFT</strong>, <strong>PayPal Comercial</strong> y pagos directos mediante <strong>Zelle Business</strong>. Emitimos factura comercial oficial estadounidense para trámites aduanales.
+            </div>
+          </div>
+
+          <!-- FAQ 3 -->
+          <div class="faq-item glass-card overflow-hidden transition-all duration-200 border border-brand-lightGray/80 dark:border-white/10">
+            <button type="button" class="faq-trigger w-full px-6 py-4.5 text-left flex items-center justify-between gap-4 font-extrabold text-sm sm:text-base text-brand-dark dark:text-white focus:outline-none">
+              <span>¿Venden la máquina completa o únicamente repuestos?</span>
+              <svg class="faq-icon w-5 h-5 text-accent-yellow transform transition-transform duration-300 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"/></svg>
+            </button>
+            <div class="faq-content hidden px-6 pb-5 pt-1 text-xs sm:text-sm text-brand-dark/75 dark:text-white/75 leading-relaxed border-t border-brand-lightGray/40 dark:border-white/5">
+              En maquinaria pesada suministramos <strong>exclusivamente repuestos, componentes de recambio y partes de desgaste</strong> (bombas hidráulicas, transmisiones, trenes de rodaje, filtros y sellos) de todas las marcas. En herramientas industriales, equipos de soldadura y jardinería suministramos tanto los equipos completos como sus partes de reposición.
+            </div>
+          </div>
+
+          <!-- FAQ 4 -->
+          <div class="faq-item glass-card overflow-hidden transition-all duration-200 border border-brand-lightGray/80 dark:border-white/10">
+            <button type="button" class="faq-trigger w-full px-6 py-4.5 text-left flex items-center justify-between gap-4 font-extrabold text-sm sm:text-base text-brand-dark dark:text-white focus:outline-none">
+              <span>¿Qué datos necesitan para ubicar una pieza difícil o fuera de catálogo?</span>
+              <svg class="faq-icon w-5 h-5 text-accent-yellow transform transition-transform duration-300 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"/></svg>
+            </button>
+            <div class="faq-content hidden px-6 pb-5 pt-1 text-xs sm:text-sm text-brand-dark/75 dark:text-white/75 leading-relaxed border-t border-brand-lightGray/40 dark:border-white/5">
+              Solo necesitas indicarnos la <strong>marca y modelo del equipo</strong> (ej. CAT 320D, Komatsu PC200), y de ser posible el número de parte OEM, VIN de la máquina o una foto legible de la placa metálica del componente. Nuestro equipo en Myrtle Beach, SC rastrea inventarios directos en EE. UU. de inmediato.
+            </div>
+          </div>
+
+          <!-- FAQ 5 -->
+          <div class="faq-item glass-card overflow-hidden transition-all duration-200 border border-brand-lightGray/80 dark:border-white/10">
+            <button type="button" class="faq-trigger w-full px-6 py-4.5 text-left flex items-center justify-between gap-4 font-extrabold text-sm sm:text-base text-brand-dark dark:text-white focus:outline-none">
+              <span>¿Cuáles son los tiempos de entrega para envíos aéreos vs. marítimos?</span>
+              <svg class="faq-icon w-5 h-5 text-accent-yellow transform transition-transform duration-300 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"/></svg>
+            </button>
+            <div class="faq-content hidden px-6 pb-5 pt-1 text-xs sm:text-sm text-brand-dark/75 dark:text-white/75 leading-relaxed border-t border-brand-lightGray/40 dark:border-white/5">
+              Para emergencias o <strong>paro de máquina</strong> gestionamos despacho aéreo prioritario (DHL / FedEx / Courier Express de carga) con entrega habitual de <strong>3 a 7 días hábiles</strong>. Para lotes de mantenimiento preventivo, compras al por mayor o carga pesada (orugas, cuchillas), consolidamos vía flete marítimo (15 a 25 días con tarifas optimizadas por volumen).
+            </div>
+          </div>
+
+          <!-- FAQ 6 -->
+          <div class="faq-item glass-card overflow-hidden transition-all duration-200 border border-brand-lightGray/80 dark:border-white/10">
+            <button type="button" class="faq-trigger w-full px-6 py-4.5 text-left flex items-center justify-between gap-4 font-extrabold text-sm sm:text-base text-brand-dark dark:text-white focus:outline-none">
+              <span>¿Cómo garantizan que la pieza sea original y compatible?</span>
+              <svg class="faq-icon w-5 h-5 text-accent-yellow transform transition-transform duration-300 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"/></svg>
+            </button>
+            <div class="faq-content hidden px-6 pb-5 pt-1 text-xs sm:text-sm text-brand-dark/75 dark:text-white/75 leading-relaxed border-t border-brand-lightGray/40 dark:border-white/5">
+              Trabajamos con distribuidores autorizados en Estados Unidos. Todo componente crítico (bombas diésel Common Rail, módulos electrónicos ECM y bombas hidráulicas) cuenta con verificación de número de serie y prueba previa en banco para asegurar cero fallas antes de abordar el transporte internacional.
             </div>
           </div>
 
@@ -1553,6 +1821,29 @@
 
     </div>
   </footer>
+
+  <!-- ================= BANNER DE CONSENTIMIENTO DE COOKIES ================= -->
+  <aside id="cookie-consent-banner" aria-label="Aviso de cookies" class="fixed bottom-6 left-6 z-50 max-w-sm bg-white/95 dark:bg-brand-darkDeep/95 backdrop-blur-md p-5 rounded-3xl shadow-2xl border border-brand-lightGray dark:border-white/10 opacity-0 pointer-events-none transition-all duration-300 transform translate-y-4">
+    <div class="flex items-start gap-3">
+      <div class="w-10 h-10 rounded-2xl bg-brand-yellow/20 text-brand-dark dark:text-accent-yellow flex items-center justify-center flex-shrink-0">
+        <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 15v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2zm10-10V7a4 4 0 00-8 0v4h8z"/></svg>
+      </div>
+      <div>
+        <h4 class="text-xs font-black text-brand-dark dark:text-white uppercase tracking-wider">Privacidad & Cookies</h4>
+        <p class="text-[11px] text-brand-dark/70 dark:text-white/70 mt-1 leading-relaxed">
+          Utilizamos cookies esenciales para recordar tus preferencias de tema y tu carrito de cotización de forma segura.
+        </p>
+      </div>
+    </div>
+    <div class="mt-4 flex items-center gap-2">
+      <button id="cookie-accept-btn" class="flex-1 py-2 px-3 rounded-xl bg-brand-dark dark:bg-accent-yellow text-white dark:text-brand-dark text-xs font-black hover:opacity-90 transition shadow">
+        Aceptar todas
+      </button>
+      <button id="cookie-essential-btn" class="py-2 px-3 rounded-xl bg-brand-lightGray/60 dark:bg-white/10 text-brand-dark dark:text-white text-xs font-bold hover:bg-brand-lightGray transition">
+        Solo esenciales
+      </button>
+    </div>
+  </aside>
 
   <!-- Scripts -->
   <script src="assets/js/config.js"></script>
