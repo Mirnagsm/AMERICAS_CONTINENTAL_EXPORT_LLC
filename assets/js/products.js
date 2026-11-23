@@ -11,6 +11,7 @@ const PRODUCT_CATEGORIES = [
   { id: "hidraulico-sellos", name: "Hidráulica & Sellos", icon: "droplet" },
   { id: "filtros-pm", name: "Filtros & Mantenimiento", icon: "shield" },
   { id: "herramientas-taller", name: "Herramientas Industriales", icon: "tool" },
+  { id: "soldadura", name: "Equipos de Soldadura", icon: "zap" },
   { id: "jardineria-paisajismo", name: "Jardinería & Paisajismo", icon: "wind" }
 ];
 
@@ -18,27 +19,27 @@ const PRODUCTS_DATA = [
   // --- BOMBAS DE INYECCIÓN, HIDRÁULICA & MÓDULOS ELECTRÓNICOS ---
   {
     id: "prod-001",
-    name: "Bomba Hidráulica de Pistones Axiales de Caudal Variable",
+    name: "Bomba de Inyección de Combustible Diésel Common Rail",
     category: "motores-inyeccion",
-    categoryName: "Bombas de Inyección & Hidráulicas",
-    brand: "Rexroth / Parker / Caterpillar",
-    code: "BOM-HID-PIST / A10VSO",
+    categoryName: "Inyección Diésel",
+    brand: "Bosch / Denso / Caterpillar",
+    code: "BOM-INJ-CR / 319-0678",
     image: "productos/bomba-inyeccion-diesel-common-rail.jpeg",
-    tags: ["Bomba Hidráulica", "Pistones Axiales", "Caudal Variable", "Alta Presión"],
-    badge: "Alta Presión",
-    shortDesc: "Bomba hidráulica de pistones axiales de caudal variable para sistemas de potencia principal y pilotaje en maquinaria pesada e industrial.",
+    tags: ["Bomba Inyección", "Diésel", "Common Rail", "Combustible", "CAT C7/C9"],
+    badge: "Inyección Diésel",
+    shortDesc: "Bomba de inyección diésel de alta presión para motores pesados. Suministro calibrado con precisión micrométrica para máxima potencia y rendimiento.",
     specs: {
-      "Tipo": "Pistones axiales de desplazamiento variable",
-      "Presión Máxima": "Hasta 350 bar (5,000 PSI)",
-      "Aplicación": "Circuitos hidráulicos de maquinaria y prensas industriales",
-      "Estado": "100% probado bajo especificaciones OEM"
+      "Sistema": "Common Rail / Inyección Diésel de Alta Presión",
+      "Presión de Inyección": "Hasta 2,000 bar continua",
+      "Compatibilidad": "Caterpillar, Komatsu, Cummins y motores diésel industriales",
+      "Calibración": "100% testeada en banco de pruebas bajo especificaciones de fábrica"
     }
   },
   {
     id: "prod-002",
     name: "Computadora y Módulo de Control Electrónico ECM / ECU",
     category: "motores-inyeccion",
-    categoryName: "Bombas de Inyección & Hidráulicas",
+    categoryName: "Computadoras & Módulos ECM",
     brand: "Caterpillar / Delphi / Bosch",
     code: "ECM-A4E4 / 372-2905",
     image: "productos/computadora-modulo-control-ecm.jpeg",
@@ -55,7 +56,7 @@ const PRODUCTS_DATA = [
     id: "prod-004",
     name: "Kit de Componentes Eléctricos (Arranque, Alternador, Sensores & Relés)",
     category: "motores-inyeccion",
-    categoryName: "Bombas de Inyección & Hidráulicas",
+    categoryName: "Componentes Eléctricos 24V",
     brand: "Delco Remy / Prestolite / Bosch",
     code: "KIT-ELEC-24V / 10461758",
     image: "productos/componentes-electricos-arranque-alternador.jpeg",
@@ -470,7 +471,7 @@ const PRODUCTS_DATA = [
     id: "prod-032",
     name: "Bomba Hidráulica de Engranajes para Maquinaria Pesada",
     category: "motores-inyeccion",
-    categoryName: "Bombas de Inyección & Hidráulicas",
+    categoryName: "Bombas Hidráulicas",
     brand: "Caterpillar / Komatsu / Parker",
     code: "BOM-HID-YELLOW",
     image: "productos/bomba-hidraulica-engranajes-amarilla.jpeg",
@@ -481,6 +482,98 @@ const PRODUCTS_DATA = [
       "Tipo": "Bomba Hidráulica de Engranajes / Pistones",
       "Aplicación": "Sistemas de levante, dirección y circuitos hidráulicos",
       "Garantía": "100% probada bajo especificaciones OEM"
+    }
+  },
+
+  // --- EQUIPOS DE SOLDADURA PROFESIONAL & INDUSTRIAL ---
+  {
+    id: "prod-weld-001",
+    name: "Miller Multimatic 215 PRO (Soldadora Eléctrica Multiproceso de Taller)",
+    category: "soldadura",
+    categoryName: "Multiproceso (MIG, TIG, Stick)",
+    brand: "Miller Electric",
+    code: "MIL-MULTIMATIC-215",
+    image: "productos/miller-multimatic-215-pro.jpeg",
+    tags: ["Soldadora", "Miller", "Multimatic 215", "Multiproceso", "MIG", "TIG", "Stick", "Auto-Set"],
+    badge: "Multiproceso (120V / 240V)",
+    shortDesc: "Equipo inverter portátil que funciona conectado a corriente de 120 V o 240 V. Permite soldar con MIG, alambre tubular (Flux-Cored), electrodo (Stick) y TIG DC, con pantalla digital y ajustes automáticos (Auto-Set).",
+    specs: {
+      "Procesos": "Multiproceso: MIG (GMAW), Flux-Cored (FCAW), Electrodo (SMAW) y TIG DC (GTAW)",
+      "Voltaje de Entrada": "Doble voltaje 120 V / 240 V (tecnología multi-voltaje MVP™)",
+      "Tecnología": "Pantalla LCD a color con configuración automática Auto-Set™ Elite",
+      "Aplicación": "Taller mecánico, mantenimiento industrial, carrocería y fabricación liviana a media"
+    }
+  },
+  {
+    id: "prod-weld-002",
+    name: "Lincoln Electric Power Wave S350 (Fuente de Poder Industrial Avanzada Multiproceso)",
+    category: "soldadura",
+    categoryName: "Multiproceso Industrial",
+    brand: "Lincoln Electric",
+    code: "LINC-POWERWAVE-S350",
+    image: "productos/lincoln-power-wave-s350.png",
+    tags: ["Soldadora", "Lincoln Electric", "Power Wave S350", "Multiproceso", "Industrial", "MIG Pulsado"],
+    badge: "Industrial Pesado 350A",
+    shortDesc: "Fuente de poder industrial de alto rendimiento pensada para producción pesada y fabricación continua. Entrega hasta 350 A (ciclo de trabajo del 100% a 300 A), entrada de 200 a 600 V y control digital de forma de onda.",
+    specs: {
+      "Capacidad / Salida": "Hasta 350 A (ciclo de trabajo continuo 100% a 300 A)",
+      "Entrada Eléctrica": "200 V a 600 V industrial (monofásica o trifásica)",
+      "Control de Onda": "Waveform Control Technology® para MIG, MIG Pulsado, TIG, Stick y desbaste",
+      "Aplicación": "Producción pesada, astilleros, estructuras metálicas y manufactura continua"
+    }
+  },
+  {
+    id: "prod-weld-003",
+    name: "Miller Bobcat 230 (Soldadora con Motor a Gasolina y Generador Integrado)",
+    category: "soldadura",
+    categoryName: "Multiproceso + Generador",
+    brand: "Miller Electric",
+    code: "MIL-BOBCAT-230",
+    image: "productos/miller-bobcat-230.jpeg",
+    tags: ["Soldadora", "Miller", "Bobcat 230", "Motogenerador", "Gasolina", "Campo", "Generador"],
+    badge: "Motogenerador 11,000W",
+    shortDesc: "Equipo autónomo con motor de combustión interna a gasolina para trabajo pesado en campo o sin red eléctrica. Suelda en Stick, MIG y Flux-Cored, y opera como generador auxiliar de hasta ~11,000 W pico.",
+    specs: {
+      "Motor / Combustible": "Motor a combustión interna a gasolina (operación 100% autónoma en campo)",
+      "Capacidad Generador": "Hasta ~11,000 Watts pico de energía auxiliar para herramientas e iluminación",
+      "Procesos": "Electrodo (Stick), MIG y Alambre tubular (Flux-Cored)",
+      "Aplicación": "Construcción pesada, faenas agrícolas, minería y reparaciones de maquinaria en campo"
+    }
+  },
+  {
+    id: "prod-weld-004",
+    name: "Lincoln Electric POWER MIG 180C (Soldadora de Alambre MIG / Flux-Cored de Taller)",
+    category: "soldadura",
+    categoryName: "De Alambre (MIG / Flux)",
+    brand: "Lincoln Electric",
+    code: "LINC-POWERMIG-180C",
+    image: "productos/lincoln-power-mig-180c.png",
+    tags: ["Soldadora", "Lincoln Electric", "Power MIG 180C", "De Alambre", "MIG", "Flux-Cored"],
+    badge: "De Alambre (208/230V)",
+    shortDesc: "Soldadora alimentadora de alambre diseñada para 208/230 V con salida de 30 a 180 A. Especializada en soldadura MIG con gas y Flux-Cored sin gas para láminas, carrocería y mantenimiento con perillas analógicas.",
+    specs: {
+      "Tipo": "Soldadora continua con alimentador de alambre interno para taller",
+      "Voltaje / Salida": "208/230 V con salida regulable continua de 30 a 180 Amperios",
+      "Alambre Compatible": "Carretes de alambre sólido con gas y tubular autoprotegido sin gas",
+      "Aplicación": "Chapa automotriz, carrocerías, mantenimiento mecánico y fabricación ligera a media"
+    }
+  },
+  {
+    id: "prod-weld-005",
+    name: "Lincoln Electric SPRINTER 180T (Soldadora Portátil TIG y Electrodo)",
+    category: "soldadura",
+    categoryName: "TIG y Electrodo",
+    brand: "Lincoln Electric",
+    code: "LINC-SPRINTER-180T",
+    image: "productos/lincoln-sprinter-180t.png",
+    tags: ["Soldadora", "Lincoln Electric", "Sprinter 180T", "TIG", "Electrodo", "Inverter", "Portátil"],
+    badge: "TIG & Electrodo (9 kg)",
+    shortDesc: "Soldadora inverter ultracompacta de apenas 9 kg y doble voltaje (120 V / 230 V), de 10 a 180 A. Enfocada en soldadura TIG DC de alta frecuencia con modo pulsado para acabados finos y electrodo revestido (Stick).",
+    specs: {
+      "Tipo": "Inverter profesional TIG DC de alta frecuencia y Electrodo revestido (Stick)",
+      "Peso / Portabilidad": "Ultracompacta de apenas 9.0 kg para máxima movilidad",
+      "Voltaje / Rango": "Doble voltaje 120 V / 230 V con salida de 10 a 180 Amperios",
+      "Funciones Especiales": "Encendido de alta frecuencia (HF TIG) y modo pulsado para soldaduras impecables"
     }
   }
 ];

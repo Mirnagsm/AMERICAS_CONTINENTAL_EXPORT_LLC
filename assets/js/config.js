@@ -44,6 +44,11 @@ const APP_CONFIG = {
         "Ingersoll Rand",
         "DEWALT"
       ],
+      weldingEquipment: [
+        "Miller Electric",
+        "Lincoln Electric",
+        "ESAB"
+      ],
       landscapingGardening: [
         "Stihl",
         "Husqvarna",
