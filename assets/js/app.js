@@ -31,6 +31,7 @@
     initRequisicionForm();
     initFloatingButtons();
     initQuickViewModal();
+    initWhatsAppNameModal();
 
     // Comprobar si hay hash en la URL (ej: #inicio, #catalogo, #carrito, #requisicion, #nosotros)
     handleUrlHash();
@@ -639,52 +640,51 @@
     const phone = phoneInput ? phoneInput.value.trim() : '';
     const generalNotes = notesInput ? notesInput.value.trim() : '';
 
-    if (!clientName) {
-      showToast('Por favor ingresa tu Nombre o Persona de Contacto.', 'error');
-      if (nameInput) nameInput.focus();
-      return;
-    }
-
     if (!destination) {
       showToast('Por favor indica el País y Ciudad de destino para calcular el flete.', 'error');
       if (countryInput) countryInput.focus();
       return;
     }
 
-    const phoneTarget = (window.APP_CONFIG && window.APP_CONFIG.company.whatsappNumber) || '18434469786';
+    // Cuadro flotante para capturar Nombre y Apellido antes de enviar
+    promptWhatsAppName(clientName, (confirmedName) => {
+      if (nameInput) nameInput.value = confirmedName;
 
-    let msg = `👋 *SOLICITUD DE COTIZACIÓN*\n`;
-    msg += `_Americas Continental Export LLC (americascontinentalexport.com)_\n\n`;
+      const phoneTarget = (window.APP_CONFIG && window.APP_CONFIG.company.whatsappNumber) || '18434469786';
 
-    msg += `📋 *DATOS DEL CLIENTE / SOLICITANTE:*\n`;
-    msg += `• *Contacto:* ${clientName}\n`;
-    if (company) msg += `• *Empresa / Taller:* ${company}\n`;
-    msg += `• *Modalidad de Compra:* ${salesMode}\n`;
-    msg += `• *Destino (País / Ciudad):* ${destination}\n`;
-    if (phone) msg += `• *Teléfono / WhatsApp:* ${phone}\n`;
-    if (generalNotes) msg += `• *Observaciones:* ${generalNotes}\n`;
+      let msg = `👋 *SOLICITUD DE COTIZACIÓN*\n`;
+      msg += `_Americas Continental Export LLC (americascontinentalexport.com)_\n\n`;
 
-    msg += `\n📦 *LISTA DE PRODUCTOS SELECCIONADOS (${state.cart.length} ítems):*\n`;
+      msg += `📋 *DATOS DEL CLIENTE / SOLICITANTE:*\n`;
+      msg += `• *Contacto:* ${confirmedName}\n`;
+      if (company) msg += `• *Empresa / Taller:* ${company}\n`;
+      msg += `• *Modalidad de Compra:* ${salesMode}\n`;
+      msg += `• *Destino (País / Ciudad):* ${destination}\n`;
+      if (phone) msg += `• *Teléfono / WhatsApp:* ${phone}\n`;
+      if (generalNotes) msg += `• *Observaciones:* ${generalNotes}\n`;
 
-    state.cart.forEach((item, index) => {
-      msg += `\n${index + 1}. *${item.name}*\n`;
-      msg += `   ▫ *Cantidad:* ${item.quantity} unidad(es)\n`;
-      msg += `   ▫ *Ref / Código:* ${item.code}\n`;
-      msg += `   ▫ *Marca:* ${item.brand}\n`;
-      msg += `   ▫ *Categoría:* ${item.categoryName}\n`;
-      if (item.note) {
-        msg += `   ▫ *VIN / Modelo Máquina:* ${item.note}\n`;
-      }
+      msg += `\n📦 *LISTA DE PRODUCTOS SELECCIONADOS (${state.cart.length} ítems):*\n`;
+
+      state.cart.forEach((item, index) => {
+        msg += `\n${index + 1}. *${item.name}*\n`;
+        msg += `   ▫ *Cantidad:* ${item.quantity} unidad(es)\n`;
+        msg += `   ▫ *Ref / Código:* ${item.code}\n`;
+        msg += `   ▫ *Marca:* ${item.brand}\n`;
+        msg += `   ▫ *Categoría:* ${item.categoryName}\n`;
+        if (item.note) {
+          msg += `   ▫ *VIN / Modelo Máquina:* ${item.note}\n`;
+        }
+      });
+
+      msg += `\n-----------------------------------\n`;
+      msg += `💬 *Estimado equipo de Americas Continental Export, quedo a la espera de su respuesta con el costo de cada ítem más el envío hasta mi lugar de destino.* ¡Muchas gracias!`;
+
+      const encodedMsg = encodeURIComponent(msg);
+      const whatsappUrl = `https://wa.me/${phoneTarget}?text=${encodedMsg}`;
+
+      window.open(whatsappUrl, '_blank');
+      showToast('¡Redirigiendo a WhatsApp con tu resumen de cotización!', 'success');
     });
-
-    msg += `\n-----------------------------------\n`;
-    msg += `💬 *Estimado equipo de Americas Continental Export, quedo a la espera de su respuesta con el costo de cada ítem más el envío hasta mi lugar de destino.* ¡Muchas gracias!`;
-
-    const encodedMsg = encodeURIComponent(msg);
-    const whatsappUrl = `https://wa.me/${phoneTarget}?text=${encodedMsg}`;
-
-    window.open(whatsappUrl, '_blank');
-    showToast('¡Redirigiendo a WhatsApp con tu resumen de cotización!', 'success');
   }
 
   // --- SECCIÓN REQUISICIÓN ESPECIAL (PIEZAS FUERA DE CATÁLOGO) ---
@@ -706,39 +706,45 @@
     const desc = document.getElementById('req-desc')?.value.trim() || '';
     const urgency = document.getElementById('req-urgency')?.value || 'Normal';
     const country = document.getElementById('req-country')?.value.trim() || '';
-    const name = document.getElementById('req-name')?.value.trim() || '';
+    const nameInput = document.getElementById('req-name');
+    const name = nameInput ? nameInput.value.trim() : '';
     const phone = document.getElementById('req-phone')?.value.trim() || '';
 
-    if (!machine || !desc || !country || !name) {
+    if (!machine || !desc || !country) {
       showToast('Por favor completa los campos requeridos con asterisco (*).', 'error');
       return;
     }
 
-    const phoneTarget = (window.APP_CONFIG && window.APP_CONFIG.company.whatsappNumber) || '18434469786';
+    // Cuadro flotante para capturar Nombre y Apellido antes de enviar
+    promptWhatsAppName(name, (confirmedName) => {
+      if (nameInput) nameInput.value = confirmedName;
 
-    let msg = `🚨 *SOLICITUD DE PEDIDO PERSONALIZADO (FUERA DE CATÁLOGO)*\n`;
-    msg += `_Americas Continental Export LLC - Atención Personalizada_\n\n`;
+      const phoneTarget = (window.APP_CONFIG && window.APP_CONFIG.company.whatsappNumber) || '18434469786';
 
-    msg += `👤 *DATOS DEL SOLICITANTE:*\n`;
-    msg += `• *Nombre / Contacto:* ${name}\n`;
-    msg += `• *País y Ciudad de Destino:* ${country}\n`;
-    if (phone) msg += `• *Teléfono / WhatsApp:* ${phone}\n`;
-    msg += `• *Modalidad de Compra:* ${salesMode}\n`;
-    msg += `• *Nivel de Urgencia:* ${urgency}\n\n`;
+      let msg = `🚨 *SOLICITUD DE PEDIDO PERSONALIZADO (FUERA DE CATÁLOGO)*\n`;
+      msg += `_Americas Continental Export LLC - Atención Personalizada_\n\n`;
 
-    msg += `🚜 *DETALLES DEL REQUERIMIENTO:*\n`;
-    msg += `• *Tipo:* ${type}\n`;
-    msg += `• *Marca y Modelo del Equipo:* ${machine}\n`;
-    msg += `• *Nº de Parte / VIN:* ${partNumber}\n`;
-    msg += `• *Descripción de la Pieza o Falla:* ${desc}\n\n`;
+      msg += `👤 *DATOS DEL SOLICITANTE:*\n`;
+      msg += `• *Nombre / Contacto:* ${confirmedName}\n`;
+      msg += `• *País y Ciudad de Destino:* ${country}\n`;
+      if (phone) msg += `• *Teléfono / WhatsApp:* ${phone}\n`;
+      msg += `• *Modalidad de Compra:* ${salesMode}\n`;
+      msg += `• *Nivel de Urgencia:* ${urgency}\n\n`;
 
-    msg += `📍 *Hola, solicito por favor verificar disponibilidad en Estados Unidos y cotizarme con flete hasta mi destino.* ¡Muchas gracias!`;
+      msg += `🚜 *DETALLES DEL REQUERIMIENTO:*\n`;
+      msg += `• *Tipo:* ${type}\n`;
+      msg += `• *Marca y Modelo del Equipo:* ${machine}\n`;
+      msg += `• *Nº de Parte / VIN:* ${partNumber}\n`;
+      msg += `• *Descripción de la Pieza o Falla:* ${desc}\n\n`;
 
-    const encodedMsg = encodeURIComponent(msg);
-    const whatsappUrl = `https://wa.me/${phoneTarget}?text=${encodedMsg}`;
+      msg += `📍 *Hola, solicito por favor verificar disponibilidad en Estados Unidos y cotizarme con flete hasta mi destino.* ¡Muchas gracias!`;
 
-    window.open(whatsappUrl, '_blank');
-    showToast('¡Enviando pedido personalizado por WhatsApp!', 'success');
+      const encodedMsg = encodeURIComponent(msg);
+      const whatsappUrl = `https://wa.me/${phoneTarget}?text=${encodedMsg}`;
+
+      window.open(whatsappUrl, '_blank');
+      showToast('¡Enviando pedido personalizado por WhatsApp!', 'success');
+    });
   }
 
   // --- MODAL DE VISTA RÁPIDA (FICHA TÉCNICA) ---
@@ -815,6 +821,98 @@
     }
   }
 
+  // --- MODAL DE IDENTIFICACIÓN PREVIO A WHATSAPP ---
+  let pendingWhatsAppCallback = null;
+
+  function initWhatsAppNameModal() {
+    const modal = document.getElementById('whatsapp-name-modal');
+    const form = document.getElementById('whatsapp-name-form');
+    const closeBtn = document.getElementById('whatsapp-name-close-btn');
+    const cancelBtn = document.getElementById('whatsapp-name-cancel-btn');
+    const nameInput = document.getElementById('whatsapp-client-name');
+
+    function closeModal() {
+      if (!modal) return;
+      modal.classList.add('opacity-0', 'pointer-events-none');
+      const dialog = modal.querySelector('.modal-dialog-box');
+      if (dialog) dialog.classList.add('scale-95');
+      document.body.style.overflow = '';
+      pendingWhatsAppCallback = null;
+    }
+
+    if (closeBtn) closeBtn.addEventListener('click', closeModal);
+    if (cancelBtn) cancelBtn.addEventListener('click', closeModal);
+    if (modal) {
+      modal.addEventListener('click', (e) => {
+        if (e.target === modal) closeModal();
+      });
+    }
+
+    document.addEventListener('keydown', (e) => {
+      if (e.key === 'Escape' && modal && !modal.classList.contains('pointer-events-none')) {
+        closeModal();
+      }
+    });
+
+    if (form) {
+      form.addEventListener('submit', (e) => {
+        e.preventDefault();
+        const enteredName = nameInput ? nameInput.value.trim() : '';
+        if (!enteredName) {
+          showToast('Por favor ingrese su nombre y apellido.', 'error');
+          if (nameInput) nameInput.focus();
+          return;
+        }
+
+        // Guardar nombre en memoria/localStorage para comodidad del usuario
+        try {
+          localStorage.setItem('ace_client_name', enteredName);
+        } catch (_) {}
+
+        const callback = pendingWhatsAppCallback;
+        closeModal();
+
+        if (typeof callback === 'function') {
+          callback(enteredName);
+        }
+      });
+    }
+  }
+
+  function promptWhatsAppName(defaultName = '', callback) {
+    const modal = document.getElementById('whatsapp-name-modal');
+    const nameInput = document.getElementById('whatsapp-client-name');
+    if (!modal) {
+      callback(defaultName || 'Cliente');
+      return;
+    }
+
+    let initialName = defaultName;
+    if (!initialName) {
+      try {
+        initialName = localStorage.getItem('ace_client_name') || '';
+      } catch (_) {}
+    }
+
+    if (nameInput) {
+      nameInput.value = initialName;
+    }
+
+    pendingWhatsAppCallback = callback;
+
+    modal.classList.remove('opacity-0', 'pointer-events-none');
+    const dialog = modal.querySelector('.modal-dialog-box');
+    if (dialog) dialog.classList.remove('scale-95');
+    document.body.style.overflow = 'hidden';
+
+    setTimeout(() => {
+      if (nameInput) {
+        nameInput.focus();
+        nameInput.select();
+      }
+    }, 150);
+  }
+
   // --- BOTONES FLOTANTES & TOAST ---
   function initFloatingButtons() {
     const scrollTopBtn = document.getElementById('scroll-top-btn');
@@ -828,6 +926,32 @@
       });
       scrollTopBtn.addEventListener('click', () => {
         window.scrollTo({ top: 0, behavior: 'smooth' });
+      });
+    }
+
+    // Botón flotante de WhatsApp (esquina inferior derecha)
+    const floatingBtn = document.getElementById('floating-whatsapp-btn');
+    if (floatingBtn) {
+      floatingBtn.addEventListener('click', (e) => {
+        e.preventDefault();
+        promptWhatsAppName('', (confirmedName) => {
+          const phoneTarget = (window.APP_CONFIG && window.APP_CONFIG.company.whatsappNumber) || '18434469786';
+          const msg = `👋 Hola Americas Continental Export, mi nombre es *${confirmedName}*. Deseo atención personalizada para cotizar repuestos o herramientas.`;
+          window.open(`https://wa.me/${phoneTarget}?text=${encodeURIComponent(msg)}`, '_blank');
+        });
+      });
+    }
+
+    // Botón de Chat Directo en sección Concierge
+    const conciergeBtn = document.getElementById('concierge-chat-btn');
+    if (conciergeBtn) {
+      conciergeBtn.addEventListener('click', (e) => {
+        e.preventDefault();
+        promptWhatsAppName('', (confirmedName) => {
+          const phoneTarget = (window.APP_CONFIG && window.APP_CONFIG.company.whatsappNumber) || '18434469786';
+          const msg = `👋 Hola Americas Continental Export, mi nombre es *${confirmedName}*. Me pongo en contacto desde su sitio web para una cotización directa.`;
+          window.open(`https://wa.me/${phoneTarget}?text=${encodeURIComponent(msg)}`, '_blank');
+        });
       });
     }
   }

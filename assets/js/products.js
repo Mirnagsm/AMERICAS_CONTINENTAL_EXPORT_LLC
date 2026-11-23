@@ -381,7 +381,7 @@ const PRODUCTS_DATA = [
     }
   },
 
-  // --- REPUESTOS DE MAQUINARIA PESADA (SOLO REPUESTOS) ---
+  // --- REPUESTOS DE MAQUINARIA PESADA ---
   {
     id: "prod-027",
     name: "Repuestos para Retroexcavadoras 4x4 (CAT / Case / JCB)",
@@ -391,7 +391,7 @@ const PRODUCTS_DATA = [
     code: "CAT-420F / CASE-580N",
     image: "productos/retroexcavadora-sobre-ruedas-cat-case.jpeg",
     tags: ["Retroexcavadora", "CAT 420", "Case 580", "Mandos Finales", "Cilindros"],
-    badge: "Solo Repuestos",
+    badge: "Repuestos de todas las marcas",
     shortDesc: "Componentes mecánicos e hidráulicos de reposición: mandos finales 4WD, vástagos y sellos de cilindro estabilizador, bombas tándem y baldes. Venta exclusiva de partes y piezas (no vendemos el equipo completo).",
     specs: {
       "Línea": "Venta exclusiva de partes y piezas de recambio",
@@ -408,7 +408,7 @@ const PRODUCTS_DATA = [
     code: "JD-210G / HITACHI-ZX200",
     image: "productos/excavadora-hidraulica-orugas-john-deere.jpeg",
     tags: ["Excavadora", "Orugas", "Tren de Rodaje", "Cadenas", "Bombas Hidráulicas"],
-    badge: "Solo Repuestos",
+    badge: "Repuestos de todas las marcas",
     shortDesc: "Despiece integral y componentes de recambio para excavación: eslabones de cadena, zapatas, rodillos de soporte, bombas hidráulicas de caudal variable y motores de giro. Venta exclusiva de piezas de reposición.",
     specs: {
       "Línea": "Venta exclusiva de componentes y partes de recambio",
@@ -425,7 +425,7 @@ const PRODUCTS_DATA = [
     code: "CAT-950H / KOM-WA380",
     image: "productos/cargador-frontal-sobre-ruedas-cat.jpeg",
     tags: ["Cargador Frontal", "Wheel Loader", "Convertidor Par", "Cuchillas Balde", "CAT 950"],
-    badge: "Solo Repuestos",
+    badge: "Repuestos de todas las marcas",
     shortDesc: "Kits de desgaste y tren de fuerza: cuchillas de balde en acero al boro, convertidores de torque, discos de fricción de transmisión y pernos de articulación central. Suministro focalizado únicamente en repuestos.",
     specs: {
       "Línea": "Suministro focalizado únicamente en repuestos y partes de desgaste",
@@ -442,7 +442,7 @@ const PRODUCTS_DATA = [
     code: "SKID-WHEEL-REP / S650",
     image: "productos/minicargador-compacto-skid-steer-bobcat.jpeg",
     tags: ["Minicargador Ruedas", "Skid Steer", "Neumáticos Sólidos", "Bobcat", "CAT 246D"],
-    badge: "Solo Repuestos",
+    badge: "Repuestos de todas las marcas",
     shortDesc: "Línea de refacciones para chasis sobre neumáticos: llantas antipinchazo, bombas hidrostáticas de dirección, cadenas de mando final en baño de aceite y bujes de brazo (venta exclusiva de repuestos).",
     specs: {
       "Chasis": "Minicargadores de 4 ruedas / Skid Steer Loaders",
@@ -459,7 +459,7 @@ const PRODUCTS_DATA = [
     code: "CTL-TRACK-REP / T770",
     image: "productos/motoniveladora-equipo-nivelacion-pesada.jpeg",
     tags: ["Orugas de Caucho", "Compact Track Loader", "Tren de Rodaje", "Bobcat T770", "Kubota SVL"],
-    badge: "Solo Repuestos",
+    badge: "Repuestos de todas las marcas",
     shortDesc: "Componentes de desgaste para orugas de goma en terrenos blandos o rocosos: bandas de caucho con alma de acero, rodillos inferiores sellados, ruedas tensoras y mandos de traslación (solo partes de recambio).",
     specs: {
       "Tren de Rodaje": "Orugas de goma de paso ancho/estrecho con tecnología anti-descarrilamiento",
