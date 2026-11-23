@@ -383,33 +383,33 @@
 
             <p class="text-xs text-brand-dark/70 dark:text-white/70 font-mono mt-1">Ref / Código: <span class="font-bold text-brand-dark dark:text-accent-yellow">${prod.code}</span></p>
 
-            <p class="text-xs text-brand-dark/60 line-clamp-2 mt-2 leading-relaxed">
+            <p class="text-xs text-brand-dark/60 dark:text-white/70 line-clamp-2 mt-2 leading-relaxed">
               ${prod.shortDesc}
             </p>
 
             <!-- Tags -->
             <div class="flex flex-wrap gap-1 mt-3">
-              ${(prod.tags || []).slice(0, 3).map(t => `<span class="text-[10px] bg-white border border-brand-lightGray px-2 py-0.5 rounded-md text-brand-dark/70">#${t}</span>`).join('')}
+              ${(prod.tags || []).slice(0, 3).map(t => `<span class="text-[10px] bg-white dark:bg-white/10 border border-brand-lightGray dark:border-white/10 px-2 py-0.5 rounded-md text-brand-dark/70 dark:text-white/80">#${t}</span>`).join('')}
             </div>
           </div>
 
           <!-- Selector de cantidad & Botón agregar -->
-          <div class="mt-5 pt-3 border-t border-brand-lightGray/60 flex items-center gap-2">
+          <div class="mt-5 pt-3 border-t border-brand-lightGray/60 dark:border-white/10 flex items-center gap-2">
             <!-- Counter -->
-            <div class="flex items-center border border-brand-lightGray rounded-xl bg-white/70 overflow-hidden shadow-sm h-10">
-              <button type="button" class="px-2.5 h-full text-brand-dark/70 hover:bg-brand-lightGray/50 active:scale-90 transition font-bold" data-qty-btn="minus" data-product-id="${prod.id}">-</button>
-              <input type="number" min="1" value="1" class="w-9 text-center bg-transparent text-xs font-bold text-brand-dark focus:outline-none" data-qty-input="${prod.id}">
-              <button type="button" class="px-2.5 h-full text-brand-dark/70 hover:bg-brand-lightGray/50 active:scale-90 transition font-bold" data-qty-btn="plus" data-product-id="${prod.id}">+</button>
+            <div class="flex items-center border border-brand-lightGray dark:border-white/10 rounded-xl bg-white/70 dark:bg-white/10 overflow-hidden shadow-sm h-10">
+              <button type="button" class="px-2.5 h-full text-brand-dark/70 dark:text-white/70 hover:bg-brand-lightGray/50 dark:hover:bg-white/10 active:scale-90 transition font-bold" data-qty-btn="minus" data-product-id="${prod.id}">-</button>
+              <input type="number" min="1" value="1" class="w-9 text-center bg-transparent text-xs font-bold text-brand-dark dark:text-white focus:outline-none" data-qty-input="${prod.id}">
+              <button type="button" class="px-2.5 h-full text-brand-dark/70 dark:text-white/70 hover:bg-brand-lightGray/50 dark:hover:bg-white/10 active:scale-90 transition font-bold" data-qty-btn="plus" data-product-id="${prod.id}">+</button>
             </div>
 
             <!-- Botón Agregar -->
             <button 
               type="button" 
-              class="btn-add-cart flex-1 h-10 flex items-center justify-center gap-1.5 text-xs font-bold rounded-xl bg-brand-dark text-white hover:bg-black transition-all shadow hover:shadow-md active:scale-98"
+              class="btn-add-cart flex-1 h-10 flex items-center justify-center gap-1.5 text-xs font-bold rounded-xl bg-brand-dark dark:bg-accent-yellow text-white dark:text-brand-dark hover:bg-black dark:hover:bg-yellow-400 transition-all shadow hover:shadow-md active:scale-98"
               data-action="add-to-cart"
               data-product-id="${prod.id}"
             >
-              <svg class="w-4 h-4 text-accent-yellow" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 3h2l.4 2M7 13h10l4-8H5.4M7 13L5.4 5M7 13l-2.293 2.293c-.63.63-.184 1.707.707 1.707H17m0 0a2 2 0 100 4 2 2 0 000-4zm-8 2a2 2 0 11-4 0 2 2 0 014 0z"/></svg>
+              <svg class="w-4 h-4 text-accent-yellow dark:text-brand-dark" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 3h2l.4 2M7 13h10l4-8H5.4M7 13L5.4 5M7 13l-2.293 2.293c-.63.63-.184 1.707.707 1.707H17m0 0a2 2 0 100 4 2 2 0 000-4zm-8 2a2 2 0 11-4 0 2 2 0 014 0z"/></svg>
               <span>Añadir al Carrito</span>
             </button>
           </div>

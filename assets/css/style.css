@@ -437,8 +437,30 @@ h1, h2, h3, h4, h5, h6 {
 }
 
 .dark .nav-link-active {
-  background: #FFD300;
-  color: #161415 !important;
+  background: rgba(255, 255, 255, 0.15) !important;
+  color: #FFD300 !important;
+}
+
+.dark .glass-card h1,
+.dark .glass-card h2,
+.dark .glass-card h3,
+.dark .glass-card h4 {
+  color: #FFFFFF;
+}
+
+.dark .glass-card p {
+  color: rgba(255, 255, 255, 0.75);
+}
+
+.dark .text-brand-dark:not([class*="bg-accent-yellow"]):not([class*="bg-brand-yellow"]) {
+  color: #FFFFFF;
+}
+
+.dark .text-brand-dark\/70,
+.dark .text-brand-dark\/80,
+.dark .text-brand-dark\/60,
+.dark .text-brand-dark\/50 {
+  color: rgba(255, 255, 255, 0.75);
 }
 
 .dark .brand-logo-card {
